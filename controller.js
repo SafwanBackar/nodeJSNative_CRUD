@@ -1,58 +1,127 @@
-const { rejects } = require('assert')
-const { resolve } = require('path')
-const { createBrotliDecompress } = require('zlib')
-const data = require('/.data')
+// const { rejects } = require('assert')
+// const { resolve } = require('path')
+// const { createBrotliDecompress } = require('zlib')
+// const data = require('./data')
+
+// class Controller {
+
+//     async getTodos() {
+//         return new Promise((resolve, _) => resolve(data))
+//     }
+
+//     async getTodo(id) {
+//         return new Promise((resolve, reject) => {
+//             let todo = data.find((todo) => todo.id === parseInt(id));
+//             if (todo) {
+//                 resolve(todo)
+//             } else {
+//                 reject(`Todo with id ${id} not found`)
+//             }
+//         })
+//     }
+
+
+//     async createTodo() {
+//         return new Promise((resolve, _) => {
+//             let newoTodo = {
+//                 id: Math.floor(4 + Math.random() * 10),
+//                 ...todo,
+//             };
+//             resolve(newoTodo)
+//         });
+//     }
+
+//     async updateTodo(id) {
+//         return new Promise((resolve, reject) => {
+//             let todo = data.find((todo) => todo.id === parseInt(id));
+//             if (!todo) {
+//                 reject(`No todo with id ${id} found`)
+//             }
+
+//             todo['completed'] = true
+//             resolve(todo)
+
+//         })
+//     }
+
+//     async deleteTodo(id) {
+//         return new Promise((resolve, reject) => {
+//             let todo = data.find((todo) => todo.id === parseInt(id));
+//             if (!todo) {
+//                 reject(`No todo with the id ${id}`)
+//             }
+//             resolve('Todo deleted successfully')
+//         })
+//     }
+// }
+
+// module.exports = Controller;
+const data = require("./data");
 
 class Controller {
-
+    // getting all todos
     async getTodos() {
-        return new Promise((resolve, _) => resolve(data))
+        // return all todos
+        return new Promise((resolve, _) => resolve(data));
     }
 
+    // getting a single todo
     async getTodo(id) {
         return new Promise((resolve, reject) => {
+            // get the todo
             let todo = data.find((todo) => todo.id === parseInt(id));
             if (todo) {
-                resolve(todo)
+                // return the todo
+                resolve(todo);
             } else {
-                reject(`Todo with id ${id} not found`)
+                // return an error
+                reject(`Todo with id ${id} not found `);
             }
-        })
-    }
-
-
-    async createTodo() {
-        return new Promise((resolve, _) => {
-            let newoTodo = {
-                id: Math.floor(4 + Math.random() * 10),
-                ...todo,
-            };
-            resolve(newoTodo)
         });
     }
 
+    // creating a todo
+    async createTodo(todo) {
+        return new Promise((resolve, _) => {
+            // create a todo, with random id and data sent
+            let newTodo = {
+                id: Math.floor(4 + Math.random() * 10),
+                ...todo,
+            };
+
+            // return the new created todo
+            resolve(newTodo);
+        });
+    }
+
+    // updating a todo
     async updateTodo(id) {
         return new Promise((resolve, reject) => {
+            // get the todo.
             let todo = data.find((todo) => todo.id === parseInt(id));
+            // if no todo, return an error
             if (!todo) {
-                reject(`No todo with id ${id} found`)
+                reject(`No todo with id ${id} found`);
             }
-
-            todo['completed'] = true
-            resolve(todo)
-
-        })
+            //else, update it by setting completed to true
+            todo["completed"] = true;
+            // return the updated todo
+            resolve(todo);
+        });
     }
 
+    // deleting a todo
     async deleteTodo(id) {
         return new Promise((resolve, reject) => {
+            // get the todo
             let todo = data.find((todo) => todo.id === parseInt(id));
+            // if no todo, return an error
             if (!todo) {
-                reject(`No todo with the id ${id}`)
+                reject(`No todo with id ${id} found`);
             }
-            resolve('Todo deleted successfully')
-        })
+            // else, return a success message
+            resolve(`Todo deleted successfully`);
+        });
     }
 }
-
 module.exports = Controller;
