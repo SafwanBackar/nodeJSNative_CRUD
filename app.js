@@ -2,7 +2,7 @@ const http = require("http");
 const Todo = require("./controller");
 const { getReqData } = require("./utils");
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 7000;
 
 const server = http.createServer(async (req, res) => {
     // /api/todos : GET
